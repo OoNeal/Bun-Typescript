@@ -1,6 +1,4 @@
-# Elian ARNAUD
-
-## TD1
+# pw-td2
 
 To install dependencies:
 
@@ -14,4 +12,4 @@ To run:
 bun run src/index.ts
 ```
 
-This project was created using `bun intest` in bun v1.1.27. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This project was created using `bun init` in bun v1.1.27. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

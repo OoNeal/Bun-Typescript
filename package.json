@@ -1,11 +1,7 @@
 {
-  "name": "td1",
+  "name": "pw-td2",
   "module": "src/index.ts",
   "type": "module",
-  "scripts": {
-    "start": "bun run src/index.ts",
-    "dev": "bun run src/index.ts --watch"
-  },
   "devDependencies": {
     "@types/bun": "latest"
   },
