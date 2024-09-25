@@ -8,40 +8,64 @@ import {HuileOlive} from "./Cart/HuileOlive.ts";
 import {Sucre} from "./Cart/Sucre.ts";
 import {TomatesCerise} from "./Cart/TomateCerise.ts";
 
-let startShip = new Starship("Prometheus", 100000);
-console.log("Etape 1");
-console.log('startShip :', startShip.ref + " " + startShip.speed + " " + startShip.status + "\n");
+function logWithSeparator(message: string): void {
+    console.log("--------------------------------------");
+    console.log("\n" + message + "\n");
+    console.log("--------------------------------------");
+}
 
 let planets: Planet[];
 planets = [
-    new Planet("Earth", 0),
-    new Planet("Mars", 1000000),
-    new Planet("Jupiter", 5000000),
-    new Planet("Saturn", 10000000),
-    new Planet("Uranus", 20000000),
-    new Planet("Neptune", 30000000),
-    new Planet("Pluto", 40000000)
+    new Planet("Mercure", 92000000),
+    new Planet("Venus", 41000000),
+    new Planet("Mars", 78000000),
+    new Planet("Jupiter", 628000000),
+    new Planet("Saturne", 1275000000),
+    new Planet("Uranus", 2724000000),
+    new Planet("Neptune", 4351000000),
 ];
-console.log("\n" + "Etape 3");
-console.log('planets :', planets);
+
+let startShip = new Starship("Prometheus", 100000);
+
+logWithSeparator("Etape 1");
+console.log('startShip:', startShip.ref + " " + startShip.speed + " " + startShip.status + "");
+
+logWithSeparator("Etape 3");
+console.log('Planets :', planets);
 planets.sort((a, b) => a.distanceFromEarth - b.distanceFromEarth);
-console.log("planets sorted by distance from Earth :" + planets + "\n");
+console.log("Planets sorted by distance from Earth:");
+planets.forEach(planet => {
+    console.log(planet.name + " " + planet.distanceFromEarth + "km");
+});
+console.log("\n");
+
 planets.sort((a, b) => a.name.localeCompare(b.name));
-console.log("planets sorted by name :" + planets+ "\n");
+console.log("Planets sorted by name:");
+planets.forEach(planet => {
+    console.log(planet.name + " " + planet.distanceFromEarth + "km");
+});
+console.log("\n");
+
 planets.sort((a, b) => b.name.localeCompare(a.name));
-console.log("planets sorted by name in reverse order :" + planets);
+console.log("Planets sorted by name in reverse order:");
+planets.forEach(planet => {
+    console.log(planet.name + " " + planet.distanceFromEarth + "km");
+});
+console.log("\n");
 
 let sum = planets.reduce((acc, planet) => acc + planet.distanceFromEarth, 0);
 let avg = sum / planets.length;
-console.log("average distance from Earth :" + avg + "\n");
+console.log("Average distance from Earth: " + avg.toFixed(2) + "km");
 
-console.log("\n" + "Etape 4");
-let flightInDays = calculateFlightDurationFromEarth(planets[1], startShip, TimeStatus.DAYS);
-console.log("Flight duration to Pluto in days :" + flightInDays + "\n");
-let flightInHours = calculateFlightDurationFromEarth(planets[1], startShip);
-console.log("Flight duration to Pluto in hours :" + flightInHours + "\n");
+logWithSeparator("Etape 4");
+planets.forEach(planet => {
+    console.log("Flight duration for " + planet.name + " :");
+    console.log(calculateFlightDurationFromEarth(planet, startShip, TimeStatus.HOURS));
+    console.log(calculateFlightDurationFromEarth(planet, startShip, TimeStatus.DAYS));
+    console.log("\n");
+})
 
-console.log("\n" + "Etape 5");
+logWithSeparator("Etape 5");
 
 const cart = new Cart();
 
@@ -59,5 +83,5 @@ cart.add(tomatesCerise, 1.5, 3.5, "kg");
 
 console.log(`Number of product types in the cart: ${cart.getNumberOfProducts()}`);
 console.log(`Amount for tomatoes: ${cart.calculateAmountByProduct("Tomates cerise")}`);
-console.log(`Total amount: ${cart.calculateAmount()}`);
-console.log(`Details: ${cart.displayDetails().join("\n")}`);
+console.log(`Total amount: ${cart.calculateAmount().toFixed(2)} €`);
+console.log(`Details: \n${cart.displayDetails().join("\n")}`);

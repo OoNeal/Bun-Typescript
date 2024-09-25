@@ -8,7 +8,7 @@ export function calculateFlightDurationFromEarth(planet: Planet, starship: Stars
         case TimeStatus.HOURS:
             return duration + " hours";
         case TimeStatus.DAYS:
-            return duration / 24 + " days";
+            return (duration / 24).toFixed(0) + " days";
         default:
             return duration + " hours";
     }
